@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Manifest>
+    <identifier>LoadingInProgress</identifier>
+    <version>1.0.0</version>
+    <dependencies/>
+    <loadAfter/>
+    <suggests>
+		<li>1969732297</li> <!-- TradeShips Drop Spot -->
+	</suggests>
+    <showCrossPromotions>true</showCrossPromotions>
+    <manifestUri/>
+    <downloadUri/>
+</Manifest>

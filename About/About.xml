@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Loading In Progress</name>
+	<author>Smash Phil</author>
+	<supportedVersions>
+		<li>1.0</li>
+	</supportedVersions>
+	
+	<description>
+Load Items and People into transporters that are already in progress.
+		
+This mod allows you to avoid canceling a load group for transport pods by editing in-progress transport groups.
+Forgot to load an item? Is some pawn interacting with an item that was selected, but is now unavailable? Then use this feature.
+	</description>
+</ModMetaData>

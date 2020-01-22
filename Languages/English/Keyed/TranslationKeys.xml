@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+	<CommandReloadTransporterSingle>Reload Transporter</CommandReloadTransporterSingle>
+	<CommandReloadTransporter>Reload {0} Transporters</CommandReloadTransporter>
+	<CommandReloadTransporterDesc>Redo loading while keeping the current items inside.</CommandReloadTransporterDesc>
+</LanguageData>

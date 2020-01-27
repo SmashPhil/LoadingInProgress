@@ -99,6 +99,7 @@ namespace DropPodsInProgress
                 {
                     this.massUsageDirty = false;
                     this.cachedMassUsage = CollectionsMassCalculator.MassUsageTransferables(this.transferables, IgnorePawnsInventoryMode.IgnoreIfAssignedToUnload, true, false);
+                    this.cachedMassUsage += InventoryMassUsage();
                 }
                 return this.cachedMassUsage;
             }
@@ -112,6 +113,7 @@ namespace DropPodsInProgress
                 {
                     this.caravanMassUsageDirty = false;
                     this.cachedCaravanMassUsage = CollectionsMassCalculator.MassUsageTransferables(this.transferables, IgnorePawnsInventoryMode.IgnoreIfAssignedToUnload, false, false);
+                    this.cachedCaravanMassUsage += InventoryMassUsage();
                 }
                 return this.cachedCaravanMassUsage;
             }
@@ -407,6 +409,10 @@ namespace DropPodsInProgress
                     if(t is Pawn)
                     {
                         bool flag = transporter.innerContainer.TryDrop(t, ThingPlaceMode.Near, out Thing thing);
+
+                        if( (t as Pawn).GetLord() != null)
+                            (t as Pawn).GetLord().lordManager.RemoveLord((t as Pawn).GetLord());
+
                         /*For Debugging*/ 
                         //Log.Message("Dropping " + t.LabelShort + " : " + flag);
                     }
@@ -584,6 +590,14 @@ namespace DropPodsInProgress
             {
                 this.AddToTransferables(list[i]);
             }
+            /* Debugging */
+            /*foreach (Pawn p in this.map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == Faction.OfPlayer))
+            {
+                Log.Message("Testing: " + p.LabelShort);
+                Log.Message("DownCheck: " + !p.Downed + " | MentalCheck: " + !p.InMentalState + " | PrisonerCheck: " + (p.IsPrisonerOfColony || p.Faction == Faction.OfPlayer) + " | LordCheck " + (p.GetLord() is null || p.GetLord().LordJob is LordJob_VoluntarilyJoinable));
+                Log.Message("-------------");
+            }
+            Log.Message("=================");*/
         }
 
         private void AddItemsToTransferables()
@@ -618,6 +632,20 @@ namespace DropPodsInProgress
         private void FlashMass()
         {
             this.lastMassFlashTime = Time.time;
+        }
+
+        private float InventoryMassUsage()
+        {
+            float num = 0f;
+            foreach(CompTransporter transporter in this.transporters)
+            {
+                foreach(Thing t in transporter.innerContainer)
+                {
+                    if(!(t is Pawn))
+                        num += t.GetStatValue(StatDefOf.Mass, true) * t.stackCount;
+                }
+            }
+            return num;
         }
 
         private void SetToLoadEverything()

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CommandReloadTransporterSingle>貨物を積み込み直す</CommandReloadTransporterSingle>
+  <CommandReloadTransporter>{0}を貨物として再度積み込む</CommandReloadTransporter>
+  <CommandReloadTransporterDesc>現在のアイテムを内部に積み込んだままで再度積み込みをやり直します。</CommandReloadTransporterDesc>
+
+</LanguageData>

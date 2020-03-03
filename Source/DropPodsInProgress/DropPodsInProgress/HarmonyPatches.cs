@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using Harmony;
+using HarmonyLib;
 using RimWorld;
 using Verse;
 using Verse.AI.Group;
@@ -17,12 +17,12 @@ namespace DropPodsInProgress
     {
         static HarmonyPatches()
         {
-            var harmony = HarmonyInstance.Create("rimworld.droppodsinprogress.smashphil");
+            var harmony = new Harmony("rimworld.droppodsinprogress.smashphil");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
-            harmony.Patch(original: AccessTools.Method(type: typeof(CompTransporter), name: nameof(CompTransporter.CompGetGizmosExtra)), prefix: null,
-                postfix: new HarmonyMethod(type: typeof(HarmonyPatches),
-                name: nameof(BoardTransporterInProgress)));
+            harmony.Patch(original: AccessTools.Method(typeof(CompTransporter), nameof(CompTransporter.CompGetGizmosExtra)), prefix: null,
+                postfix: new HarmonyMethod(typeof(HarmonyPatches),
+                nameof(BoardTransporterInProgress)));
         }
 
         public static IEnumerable<Gizmo> BoardTransporterInProgress(IEnumerable<Gizmo> __result, CompTransporter __instance)

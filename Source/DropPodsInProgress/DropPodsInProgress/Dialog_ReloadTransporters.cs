@@ -9,7 +9,6 @@ using Verse.AI;
 using Verse.AI.Group;
 using Verse.Sound;
 using UnityEngine;
-using Harmony;
 
 namespace DropPodsInProgress
 {

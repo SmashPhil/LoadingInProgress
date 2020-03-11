@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+	<CommandReloadTransporterSingle>Volver a cargar el transporte</CommandReloadTransporterSingle>
+	<CommandReloadTransporter>Volver a cargar {0} transportes</CommandReloadTransporter>
+	<CommandReloadTransporterDesc>Volver a cargar manteniendo los elementos actuales en el interior.</CommandReloadTransporterDesc>
+</LanguageData>

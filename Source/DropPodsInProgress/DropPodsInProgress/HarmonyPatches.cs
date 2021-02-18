@@ -31,7 +31,7 @@ namespace DropPodsInProgress
         public static IEnumerable<Gizmo> BoardTransporterInProgress(IEnumerable<Gizmo> __result, CompTransporter __instance)
         {
             List<CompTransporter> transporterGroup = __instance.TransportersInGroup(__instance.parent.Map);
-            if (!transporterGroup.NullOrEmpty())
+            if (__instance.LoadingInProgressOrReadyToLaunch && !transporterGroup.NullOrEmpty())
             {
                 yield return new Command_ReloadTransporters
                 {

@@ -15,6 +15,9 @@ namespace DropPodsInProgress
     [StaticConstructorOnStartup]
     internal static class HarmonyPatches
     {
+        private static readonly Texture2D LoadCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/LoadTransporter", true);
+        private static readonly Texture2D CancelLoadCommandTex = ContentFinder<Texture2D>.Get("UI/Designators/Cancel", true);
+
         static HarmonyPatches()
         {
             var harmony = new Harmony("rimworld.droppodsinprogress.smashphil");
@@ -27,29 +30,22 @@ namespace DropPodsInProgress
 
         public static IEnumerable<Gizmo> BoardTransporterInProgress(IEnumerable<Gizmo> __result, CompTransporter __instance)
         {
-            IEnumerator<Gizmo> enumerator = __result.GetEnumerator();
-            while (enumerator.MoveNext())
+            List<CompTransporter> transporterGroup = __instance.TransportersInGroup(__instance.parent.Map);
+            if (!transporterGroup.NullOrEmpty())
             {
-                var element = enumerator.Current;
-                if(__instance.LoadingInProgressOrReadyToLaunch && (element as Command_Action)?.icon == CancelLoadCommandTex)
+                yield return new Command_ReloadTransporters
                 {
-                    yield return element;
-                    List<CompTransporter> transporterGroup = __instance.TransportersInGroup(__instance.parent.Map);
-                    yield return new Command_ReloadTransporters
-                    {
-                        defaultLabel = transporterGroup.Count > 1 ? "CommandReloadTransporter".Translate(transporterGroup.Count) : "CommandReloadTransporterSingle".Translate(),
-                        defaultDesc = "CommandReloadTransporterDesc".Translate(),
-                        icon = LoadCommandTex,
-                        transComp = __instance,
-                        transporters = transporterGroup
-                    };
-                    continue;
-                }
-                yield return element;
+                    defaultLabel = transporterGroup.Count > 1 ? "CommandReloadTransporter".Translate(transporterGroup.Count) : "CommandReloadTransporterSingle".Translate(),
+                    defaultDesc = "CommandReloadTransporterDesc".Translate(),
+                    icon = LoadCommandTex,
+                    transComp = __instance,
+                    transporters = transporterGroup
+                };
+            }
+            foreach (Gizmo gizmo in __result)
+            {
+                yield return gizmo;
             }
         }
-
-        private static readonly Texture2D LoadCommandTex = ContentFinder<Texture2D>.Get("UI/Commands/LoadTransporter", true);
-        private static readonly Texture2D CancelLoadCommandTex = ContentFinder<Texture2D>.Get("UI/Designators/Cancel", true);
     }
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<LanguageData>
+	<CommandReloadTransporterSingle>Transporter beladen</CommandReloadTransporterSingle>
+	<CommandReloadTransporter>Beladen {0} Transporter</CommandReloadTransporter>
+	<CommandReloadTransporterDesc>Erneutes Beladen unter Beibehaltung der aktuellen GegenstÃ¤nde.</CommandReloadTransporterDesc>
+</LanguageData>

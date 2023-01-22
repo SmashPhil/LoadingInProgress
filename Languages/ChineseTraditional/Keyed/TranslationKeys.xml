@@ -3,6 +3,6 @@
 <LanguageData>
   <CommandReloadTransporterSingle>整備運輸艙</CommandReloadTransporterSingle>
   <CommandReloadTransporter>整備 {0} 個運輸艙</CommandReloadTransporter>
-  <CommandReloadTransporterDesc>直接裝載物品/人員，不再卸下後重裝。</CommandReloadTransporterDesc>
+  <CommandReloadTransporterDesc>重新裝卸時不卸下運輸艙內當前已勾選且裝載好的貨物。</CommandReloadTransporterDesc>
 
 </LanguageData>
